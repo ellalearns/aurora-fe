@@ -2,6 +2,7 @@ import React from "react";
 import { useQuery } from "react-query";
 import getWelcome from "./api/getWelcome"
 import Header from "./components/Header";
+import Sidebar from "./components/Sidebar";
 import "./styles/App.css"
 
 
@@ -27,6 +28,7 @@ function App() {
             {/* <p>first steps</p> */}
             {/* {greeting} */}
             <Header />
+            <Sidebar />
 
         </div>
     )
