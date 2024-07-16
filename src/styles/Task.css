@@ -1,0 +1,60 @@
+
+.task-card {
+    height: 10%;
+    width: 90%;
+    margin-top: 2%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 5%;
+    padding-right: 5%;
+    border: 2px solid #964b4b;
+    border-radius: 20px;
+}
+
+.task-icons {
+    display: flex;
+    flex-basis: 5%;
+    justify-content: space-around;
+    flex-grow: 0.2;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 1s, transform 5s ease-in-out;
+}
+
+.task-card:hover .task-icons {
+    visibility: visible;
+    opacity: 1;
+}
+
+.task-icon:hover {
+    transform: scale(1.13);
+    cursor: pointer;
+}
+
+.title-major {
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 0.023;
+}
+
+.title-div {
+    flex: 0 0 auto;
+    max-width: 450px;
+}
+
+.title-div > h3 {
+    overflow: hidden;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.title-major > p {
+    background-color: #964b4b;
+    padding: 1%;
+    border-radius: 7px;
+    font-size: small;
+    color: white;
+    font-weight: bold;
+}
