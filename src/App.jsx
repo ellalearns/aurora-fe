@@ -4,6 +4,7 @@ import getWelcome from "./api/getWelcome"
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import Task from "./components/Task";
+import Footer from "./components/Footer";
 import "./styles/App.css"
 
 
@@ -26,8 +27,6 @@ function App() {
 
     return (
         <div>
-            {/* <p>first steps</p> */}
-            {/* {greeting} */}
             <Header />
             <div className="main-container">
                 <Sidebar />
@@ -35,9 +34,11 @@ function App() {
                     <Task />
                     <Task />
                     <Task />
+                    <div className="footer">
+                        <Footer />
+                    </div>
                 </div>
             </div>
-
         </div>
     )
 }

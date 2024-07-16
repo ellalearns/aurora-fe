@@ -25,6 +25,13 @@ body {
     justify-items: center;
 }
 
-
-
+.footer {
+    position: fixed;
+    bottom: 0;
+    border-top: 3px solid #964b4b;
+    width: calc(100% - 150px);
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+}
 
