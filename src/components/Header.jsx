@@ -1,4 +1,5 @@
 import React from "react";
+import Target from "./Target";
 import "../styles/Header.css";
 import icon from "../images/icon.svg";
 import user from "../images/user.svg";
@@ -10,7 +11,7 @@ function Header() {
         <div className="header-nav-div">
             <nav className="header-nav">
                 <img src={icon} className="header-icon" id="aurora-icon" />
-                <h3 className="target">70%</h3>
+                <Target className="target" />
                 <img src={user} className="header-icon" id="aurora-user" />
             </nav>
         </div>
