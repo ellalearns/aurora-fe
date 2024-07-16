@@ -6,7 +6,7 @@ import "../styles/Target.css"
 function Target() {
 
     return (
-        <div className="target-icon">
+        <div className="target">
             <h3>70</h3>
         </div>
     )
