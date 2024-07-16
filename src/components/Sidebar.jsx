@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect, useState } from "react";
 import "../styles/Sidebar.css"
 import sidebaritems from "../staticData/sidebaritems.js";
 import today from "../images/today.svg"
@@ -6,18 +7,20 @@ import time from "../images/time.svg"
 import pomo from "../images/pomo.svg"
 import reports from "../images/reports.svg"
 import settings from "../images/settings.svg"
-import icon from "../images/icon.svg"
+import lock_open from "../images/lock-open.svg"
+import lock_close from "../images/lock-close.svg"
 
 
 function Sidebar() {
 
     const icons = [today, time, pomo, reports]
 
+    const [expandable, setExpandable] = useState(false)
+    const [lock, setLock] = useState(false)
+
     return (
-        <div className="sidebar">
-            {/* <div>
-                <img src={icon} className="sidebar-icon" />
-            </div> */}
+        <div className={`sidebar ${expandable ? "expandable" : ""}`}
+            >
             <div className="upper-sidebar">
                 <ul className="sidebar-items">
                     {sidebaritems.map((item, index) => {
@@ -35,6 +38,20 @@ function Sidebar() {
                     <li className="sidebar-item">
                         <img src={settings} />
                         <p><span>Settings</span></p>
+                    </li>
+                    <li className="sidebar-item">
+                        <img src={
+                            (lock == false) ? lock_close : lock_open
+                        }onClick={() => {
+                            setExpandable(!expandable)
+                            setLock(!lock)
+                        }
+                        } />
+                        <p onClick={() => {
+                                setExpandable(!expandable)
+                                setLock(!lock)
+                            }
+                            }><span>Lock Dashboard</span></p>
                     </li>
                 </ul>
             </div>

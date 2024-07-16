@@ -1,0 +1,9 @@
+
+.footer-nav {
+    transition: transform 0.3s;
+}
+
+.footer-nav:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+}
