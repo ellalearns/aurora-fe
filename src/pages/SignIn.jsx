@@ -55,7 +55,8 @@ function SignIn() {
                         type="email"
                         name="email"
                         id="email"
-                        required placeholder="email"
+                        required
+                        placeholder="email"
                         className="input"
                         onChange={(e) => setUser({
                             ...user,
@@ -66,7 +67,8 @@ function SignIn() {
                         type="password"
                         name="password"
                         id="password"
-                        required placeholder="password"
+                        required
+                        placeholder="password"
                         className="input"
                         onChange={(e) => setUser({
                             ...user,
