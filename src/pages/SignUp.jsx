@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "../styles/SignUp.css"
 import icon from "../images/icon.svg"
 
@@ -19,7 +20,7 @@ function SignUp() {
             </div>
             <div id="button-div">
                 <button>New Aurora</button>
-                <p>have an account? <span><a href="">sign in</a></span></p>
+                <p>have an account? <span><Link to="/signin">sign in</Link></span></p>
             </div>
             </form>
         </div>

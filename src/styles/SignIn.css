@@ -80,13 +80,13 @@
     transform: translateY(-2px) scale(1.02);
 }
 
-#button-div > p > span > Link {
+#button-div > p > span > a {
     color: #964b4b;
     font-weight: 600;
     display: inline-flex;
     transition: transform 0.3s ease-in-out;
 }
 
-#button-div > p > span >  Link:hover {
+#button-div > p > span >  a:hover {
     transform: translateY(-2px) scale(1.01);
 }
