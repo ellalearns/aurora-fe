@@ -1,7 +1,8 @@
 import axios from "axios";
+import { URL } from "./url";
 
 const getWelcome = async () => {
-    const {data} = await axios.get("http://127.0.0.1:5000/welcome")
+    const {data} = await axios.get(`${URL}/welcome`)
     return data;
 };
 

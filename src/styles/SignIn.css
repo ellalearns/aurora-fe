@@ -90,3 +90,7 @@
 #button-div > p > span >  a:hover {
     transform: translateY(-2px) scale(1.01);
 }
+
+#incorrect-details {
+    color: salmon;
+}
