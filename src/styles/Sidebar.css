@@ -1,9 +1,8 @@
-
 .sidebar {
     --expandable: false;
     min-width: 150px;
-    min-height: calc(100vh - 7.5%);
-    border-right: 2px solid #964b4b;
+    min-height: calc(100vh - 73px - 73px);
+    /* border-right: 2px solid #964b4b; */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -22,7 +21,6 @@
     align-items: self-end;
     transform: translateX(100px);
 }
-
 
 .sidebar-items {
     list-style: none;
