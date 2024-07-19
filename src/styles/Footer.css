@@ -17,3 +17,57 @@
     cursor: pointer;
 }
 
+.modal-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+}
+
+.modal-title {
+    margin: 1%;
+}
+
+.modal-body > input, .modal-body > textarea, #check {
+    margin: 1%;
+    width: 90%;
+    height: 50px;
+    box-shadow: 1px 1px #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 3%;
+    text-wrap: wrap;
+    margin-top: 4%;
+}
+
+input:focus, textarea:focus {
+    border: 2px solid #badbad;
+    outline: none;
+}
+
+#check {
+    margin-top: 1%;
+}
+
+#checkbox:checked {
+    content: "check_circle";
+    accent-color: #badbad;
+    color: white;
+}
+
+#checkbox:checked::after {
+    border: green;
+}
+
+#desc {
+    height: 100px;
+}
+
+
+
+
