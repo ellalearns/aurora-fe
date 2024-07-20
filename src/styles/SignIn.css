@@ -1,6 +1,6 @@
 ::selection {
-    background-color: #badbad;
-    color: #fffbf0;
+    background-color: #61d345;
+    color: #fffffb;
 }
 
 #signin-container {
@@ -48,12 +48,12 @@
 }
 
 .input:not(:placeholder-shown) {
-    border: 2px solid #badbad;
+    border: 2px solid #61d345;
 }
 
 .input:invalid:focus {
     border: 2px solid;
-    border-color: salmon;
+    border-color: #ff4b4b;
 }
 
 #button-div {
@@ -70,7 +70,7 @@
     background-color: #964b4b;
     border: 1px solid #964b4b;
     border-radius: 15px;
-    color: #fffbf0;
+    color: #fffffb;
     transition: transform 0.3s ease-in-out;
     font-weight: 500;
 }
@@ -92,5 +92,5 @@
 }
 
 #incorrect-details {
-    color: salmon;
+    color: #ff4b4b;
 }
