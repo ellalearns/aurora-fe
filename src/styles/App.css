@@ -5,7 +5,8 @@
 body {
     padding: 0;
     margin: 0;
-    background-color: #fffbf0;
+    /* background-color: #fffffb; */
+    background-color: #fffffb;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-weight: 500;
 }
@@ -24,14 +25,7 @@ body {
     align-items: center;
     justify-items: center;
 }
-/* 
-.footer {
-    position: fixed;
-    bottom: 0;
-    border-right: 3px solid #964b4b;
-    width: 100vw;
-    align-items: center;
-    justify-items: center;
-    text-align: center;
-} */
 
+.main-content > button:hover {
+    cursor: pointer;
+}

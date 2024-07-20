@@ -46,7 +46,7 @@
 }
 
 input:focus, textarea:focus {
-    border: 2px solid #badbad;
+    border: 2px solid #61d345;
     outline: none;
 }
 
@@ -56,7 +56,7 @@ input:focus, textarea:focus {
 
 #checkbox:checked {
     content: "check_circle";
-    accent-color: #badbad;
+    accent-color: #61d345;
     color: white;
 }
 

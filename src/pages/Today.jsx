@@ -1,5 +1,7 @@
 import React from "react";
 import { useQuery } from "react-query";
+import { toast, Toaster } from "react-hot-toast";
+import aToast from "../staticData/toasterStyle"
 import getWelcome from "../api/getWelcome"
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";

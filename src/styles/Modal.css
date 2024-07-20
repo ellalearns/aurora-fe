@@ -12,7 +12,7 @@
     position: fixed;
     height: 500px;
     width: 700px;
-    background-color: #fffbf0;
+    background-color: #fffffb;
     z-index: 1000;
     top: 50%;
     left: 50%;
@@ -51,11 +51,11 @@
 }
 
 .button-modal {
-    background-color: salmon;
+    background-color: #ff4b4b;
     outline: none;
-    box-shadow: 1px 1px salmon;
+    box-shadow: 1px 1px #ff4b4b;
     border: none;
-    color: #fffbf0;
+    color: #fffffb;
     border-radius: 5px;
     transition: transform 0.3s ease-in-out;
 }
