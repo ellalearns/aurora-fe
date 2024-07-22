@@ -26,6 +26,15 @@ function Today() {
     }
 
     if (isError) {
+        if (error.response === undefined)
+        {
+            return (
+                <div>
+                    <h4>server error. try later.</h4>
+                </div>
+            )
+        }
+
         if (error.response.status === 401)
         {
             navigate("/signin")
@@ -44,7 +53,7 @@ function Today() {
                 <div className="main-content">
                     {
                         (data.user.tasks.length > 0) ? data.user.tasks.map((task, index) => {
-                            return <Task />
+                            return <Task task={task} />
                         }) : <h3 id="greeting">Hey, {data.user.username}, add new tasks for today :) </h3>
                     }
                     <div className="footer">

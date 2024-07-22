@@ -6,15 +6,15 @@ import plus from "../images/plus.svg"
 import done from "../images/done.svg"
 
 
-function Task() {
+function Task({ task }) {
 
     return (
         <div className="task-card">
             <div className="title-major">
                 <div className="title-div">
-                <h3>More Aurora Tasks today</h3>
+                <h3>{task.title}</h3>
                 </div>
-                <p><span>major</span></p>
+                {task.is_major && <p><span>major</span></p>}
             </div>
             <div className="task-icons">
                 <img src={start} className="task-icon"/>

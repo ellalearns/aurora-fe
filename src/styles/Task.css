@@ -1,6 +1,6 @@
 
 .task-card {
-    height: 10%;
+    min-height: 120px;
     width: 90%;
     margin-top: 2%;
     display: flex;
