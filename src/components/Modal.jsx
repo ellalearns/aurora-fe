@@ -4,7 +4,7 @@ import "../styles/Modal.css";
 import close from "../images/close.svg";
 
 
-function Modal({ setIsOpen, mainButtonText, children }) {
+function Modal({ setIsOpen, mainButtonText, children, mainButtonFn }) {
 
     return ReactDOM.createPortal(
         <div className="modal-container">
@@ -28,6 +28,7 @@ function Modal({ setIsOpen, mainButtonText, children }) {
                     <button
                         id="main-modal-button"
                         className="button-modal"
+                        onClick={mainButtonFn}
                     >
                         {mainButtonText}
                     </button>

@@ -1,18 +1,18 @@
 import axios from "axios";
 import { URL } from "./url";
 
-const signUp = async (payload) => {
+const createTask = async (payload) => {
     const { data } = await axios.post(
-        `${URL}/auth/sign-up`,
+        `${URL}/task/`,
         payload,
         {
             headers: {
-                'Content-Type': 'application/json'
+                "Content-Type": "application/json"
             },
             withCredentials: true
         }
     )
     return data;
-};
+}
 
-export default signUp;
+export default createTask;

@@ -1,9 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import aToast from "../staticData/toasterStyle"
-import getWelcome from "../api/getWelcome"
 import getUserDetails from "../api/getUserDetails";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
@@ -14,12 +12,25 @@ import "../styles/App.css"
 
 function Today() {
 
+    const [ allTasks, setAllTasks ] = useState([])
+
     const navigate = useNavigate()
 
     const { isLoading, isError, error, data } = useQuery({
         queryKey: "user_today",
-        queryFn: getUserDetails
+        queryFn: getUserDetails,
+        refetchOnMount: true,
+        refetchOnWindowFocus: true
     })
+
+    useEffect(
+        () => {
+            if (data) {
+                setAllTasks(data)
+            }
+        },
+        [data]
+    )
 
     if (isLoading) {
         return
@@ -52,9 +63,9 @@ function Today() {
                 <Sidebar />
                 <div className="main-content">
                     {
-                        (data.user.tasks.length > 0) ? data.user.tasks.map((task, index) => {
+                        (allTasks.length > 0) ? allTasks.map((task, index) => {
                             return <Task task={task} />
-                        }) : <h3 id="greeting">Hey, {data.user.username}, add new tasks for today :) </h3>
+                        }) : <h3 id="greeting">Hey, test, add new tasks for today :) </h3>
                     }
                     <div className="footer">
                         <Footer />

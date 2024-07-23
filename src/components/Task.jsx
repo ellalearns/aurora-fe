@@ -14,7 +14,7 @@ function Task({ task }) {
                 <div className="title-div">
                 <h3>{task.title}</h3>
                 </div>
-                {task.is_major && <p><span>major</span></p>}
+                {task.is_major==true && <p><span>major</span></p>}
             </div>
             <div className="task-icons">
                 <img src={start} className="task-icon"/>
