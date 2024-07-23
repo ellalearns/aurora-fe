@@ -1,6 +1,6 @@
 import React from "react";
 import Lottie from "react-lottie";
-import hourglass from "../images/hourglass.json"
+import hourglass from "../images/new_hourglass.json"
 import start from "../images/start.svg"
 import stop from "../images/stop.svg"
 import pause from "../images/pause.svg"
