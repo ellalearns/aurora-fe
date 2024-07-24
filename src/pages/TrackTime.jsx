@@ -49,8 +49,7 @@ function TrackTime({ task = {} }) {
 
     let stopTime = new Date()
 
-    let task_id = ""
-    let payload = {}
+    const [taskId, setTaskId] = useState("")
 
     useEffect(() => {
         let interval;
@@ -102,9 +101,14 @@ function TrackTime({ task = {} }) {
 
         setDisableStart(false)
         setDisableStop(true)
+
+        console.log(taskId)
     }
 
     const onStart = async () => {
+
+        let task_id = ""
+        let payload = {}
 
         const newStart = new Date()
 
@@ -126,12 +130,13 @@ function TrackTime({ task = {} }) {
         try {
             const data = await createTask(payload)
             console.log(data)
+            setTaskId(data["id"])
         } catch (error) {
             return
         }
     }
 
-    
+
 
     return (
         <div className="main-contain">
