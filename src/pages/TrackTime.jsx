@@ -10,6 +10,8 @@ import stopFaded from "../images/stop_faded.svg"
 import pauseFaded from "../images/pause_faded.svg"
 import "../styles/TrackTime.css"
 
+import createTask from "../api/createTask";
+
 
 function HourGlass({ hourglassRef }) {
     const defaultOptions = {
@@ -27,7 +29,7 @@ function HourGlass({ hourglassRef }) {
 }
 
 
-function TrackTime() {
+function TrackTime({ task = {} }) {
 
     const hourglassRef = useRef(null)
     const [paused, setPaused] = useState(false)
@@ -46,6 +48,9 @@ function TrackTime() {
     const [clockStop, setClockStop] = useState(null)
 
     let stopTime = new Date()
+
+    let task_id = ""
+    let payload = {}
 
     useEffect(() => {
         let interval;
@@ -73,14 +78,14 @@ function TrackTime() {
 
     }, [tracking])
 
-    function startTimer() {
+    const startTimer = (newStart) => {
         setPaused(false)
         if (hourglassRef.current) {
             hourglassRef.current.play()
         }
 
         setTracking(true)
-        setClockStart(new Date())
+        setClockStart(newStart)
 
         setDisableStart(true)
         setDisableStop(false)
@@ -88,7 +93,7 @@ function TrackTime() {
 
     function stopTimer() {
         setPaused(true)
-        if (hourglass.current) {
+        if (hourglassRef.current) {
             hourglassRef.current.stop()
         }
 
@@ -98,6 +103,35 @@ function TrackTime() {
         setDisableStart(false)
         setDisableStop(true)
     }
+
+    const onStart = async () => {
+
+        const newStart = new Date()
+
+        startTimer(newStart)
+
+        if (Object.keys(task).length === 0) {
+            task_id = ""
+            payload = {
+                "started_at": newStart
+            }
+        } else {
+            task_id = task["id"]
+            payload = {
+                "id": task_id,
+                "started_at": newStart
+            }
+        }
+
+        try {
+            const data = await createTask(payload)
+            console.log(data)
+        } catch (error) {
+            return
+        }
+    }
+
+    
 
     return (
         <div className="main-contain">
@@ -109,7 +143,12 @@ function TrackTime() {
             </div>
             <div className="hourglass">
                 {
-                    (paused === false) ? <HourGlass hourglassRef={hourglassRef} /> : <img src={frozenHourglass} />
+                    (paused === false) ?
+                        <div style={{pointerEvents: "none"}}>
+                            <HourGlass hourglassRef={hourglassRef} />
+                        </div>
+                        :
+                        <img src={frozenHourglass} />
                 }
             </div>
             <div className="time-tracked">
@@ -119,7 +158,7 @@ function TrackTime() {
                 <img
                     src={(disableStart == false) ? start : startFaded}
                     alt="start icon"
-                    onClick={disableStart == false ? startTimer : null}
+                    onClick={disableStart == false ? onStart : null}
                 />
                 <img
                     src={(disableStop == false) ? stop : stopFaded}
