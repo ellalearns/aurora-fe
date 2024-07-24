@@ -11,6 +11,7 @@ import pauseFaded from "../images/pause_faded.svg"
 import "../styles/TrackTime.css"
 
 import createTask from "../api/createTask";
+import stopTask from "../api/stopTask";
 
 
 function HourGlass({ hourglassRef }) {
@@ -50,6 +51,9 @@ function TrackTime({ task = {} }) {
     let stopTime = new Date()
 
     const [taskId, setTaskId] = useState("")
+    let task_id1 = ""
+
+    const [checkstop, setcheckstop] = useState("")
 
     useEffect(() => {
         let interval;
@@ -90,19 +94,17 @@ function TrackTime({ task = {} }) {
         setDisableStop(false)
     }
 
-    function stopTimer() {
+    function stopTimer(newStop) {
         setPaused(true)
         if (hourglassRef.current) {
             hourglassRef.current.stop()
         }
 
         setTracking(false)
-        setClockStop(new Date())
+        setClockStop(newStop)
 
         setDisableStart(false)
         setDisableStop(true)
-
-        console.log(taskId)
     }
 
     const onStart = async () => {
@@ -129,8 +131,27 @@ function TrackTime({ task = {} }) {
 
         try {
             const data = await createTask(payload)
-            console.log(data)
             setTaskId(data["id"])
+        } catch (error) {
+            return
+        }
+    }
+
+    const onStop = async () => {
+
+        let payload = {}
+
+        const newStop = new Date()
+
+        stopTimer(newStop)
+
+        payload = {
+            "id": taskId,
+            "stopped_at": newStop
+        }
+
+        try {
+            const data = await stopTask(payload)
         } catch (error) {
             return
         }
@@ -168,14 +189,11 @@ function TrackTime({ task = {} }) {
                 <img
                     src={(disableStop == false) ? stop : stopFaded}
                     alt="stop icon"
-                    onClick={disableStop == false ? stopTimer : null}
+                    onClick={disableStop == false ? onStop : null}
                 />
                 <img
                     src={(disablePause == false) ? pause : pauseFaded}
                     alt="pause icon"
-                    onClick={() => {
-
-                    }}
                 />
             </div>
         </div>
