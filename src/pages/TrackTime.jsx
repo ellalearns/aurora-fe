@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import Lottie from "react-lottie";
 import hourglass from "../images/new_hourglass.json"
 import frozenHourglass from "../images/hourglass.png"
@@ -30,12 +31,23 @@ function HourGlass({ hourglassRef }) {
 }
 
 
-function TrackTime({ task = {} }) {
+function TrackTime() {
+
+    const navigate = useNavigate()
+
+    const location = useLocation()
+    const { task = {} } = location.state || {}
+
+    const [taskTitle, setTaskTitle] = useState(
+        task && task.title ? task.title : ""
+    )
 
     const hourglassRef = useRef(null)
     const [paused, setPaused] = useState(false)
 
-    const [disableStart, setDisableStart] = useState(false)
+    const [disableStart, setDisableStart] = useState(
+        task && taskTitle ? false : true
+    )
     const [disableStop, setDisableStop] = useState(true)
     const [disablePause, setDisablePause] = useState(true)
 
@@ -54,6 +66,18 @@ function TrackTime({ task = {} }) {
     let task_id1 = ""
 
     const [checkstop, setcheckstop] = useState("")
+
+    const [titleValue, setTitleValue] = useState("")
+    const handleKeyDown = (e) => {
+        if (e.key === "Enter") {
+            if (titleValue == "") {
+                return
+            }
+            setTaskTitle(titleValue)
+            setDisableStart(false)
+        }
+    }
+
 
     useEffect(() => {
         let interval;
@@ -113,13 +137,15 @@ function TrackTime({ task = {} }) {
         let payload = {}
 
         const newStart = new Date()
+        const serverStart = newStart.toISOString()
 
         startTimer(newStart)
 
-        if (Object.keys(task).length === 0) {
+        if (task === undefined || Object.keys(task).length === 0) {
             task_id = ""
             payload = {
-                "started_at": newStart
+                "title": taskTitle,
+                "started_at": serverStart
             }
         } else {
             task_id = task["id"]
@@ -155,6 +181,8 @@ function TrackTime({ task = {} }) {
         } catch (error) {
             return
         }
+
+        navigate("/")
     }
 
 
@@ -162,15 +190,22 @@ function TrackTime({ task = {} }) {
     return (
         <div className="main-contain">
             <div className="top-major">
-                <p>major</p>
+                {task.is_major === true && <p>major</p>}
             </div>
             <div className="task-title">
-                <h3>Task Title Here</h3>
+                {taskTitle ? <h3>{`${taskTitle}`}</h3>
+                 : 
+                 <input 
+                 placeholder="Task Title Here"
+                 className="newTask"
+                 onChange={(e) => setTitleValue(e.target.value)}
+                 onKeyDown={handleKeyDown}
+                />}
             </div>
             <div className="hourglass">
                 {
                     (paused === false) ?
-                        <div style={{pointerEvents: "none"}}>
+                        <div style={{ pointerEvents: "none" }}>
                             <HourGlass hourglassRef={hourglassRef} />
                         </div>
                         :

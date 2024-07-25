@@ -69,7 +69,7 @@ function Footer() {
                             type="checkbox"
                             name="major"
                             id="checkbox"
-                            onChange={(e) => {setIsMajor(!isMajor)}}
+                            onChange={() => {setIsMajor(!isMajor)}}
                             >
                         </input>
                         <label for="major">
