@@ -24,6 +24,9 @@ function SignIn() {
             const data = await signIn(payload)
             console.log(data)
         } catch (error) {
+            if (error.response === undefined) {
+                return
+            }
             if (error.response.status === 400) {
                 console.log(error.response.data)
                 setAgainText("incorrect details!")

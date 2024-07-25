@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/Sidebar.css"
 import sidebaritems from "../staticData/sidebaritems.js";
 import today from "../images/today.svg"
@@ -13,19 +14,25 @@ import lock_close from "../images/lock-close.svg"
 
 function Sidebar() {
 
+    const navigate = useNavigate()
+
     const icons = [today, time, pomo, reports]
+    const navlinks = ["", "/track", "/pomo", "/reports"]
 
     const [expandable, setExpandable] = useState(false)
     const [lock, setLock] = useState(false)
 
     return (
         <div className={`sidebar ${expandable ? "expandable" : ""}`}
-            >
+        >
             <div className="upper-sidebar">
                 <ul className="sidebar-items">
                     {sidebaritems.map((item, index) => {
                         return (
-                            <li className="sidebar-item">
+                            <li
+                                className="sidebar-item"
+                                onClick={() => {navigate(navlinks[index])}}
+                            >
                                 <img src={icons[index]} />
                                 <p><span>{item.name}</span></p>
                             </li>
@@ -35,23 +42,26 @@ function Sidebar() {
             </div>
             <div className="lower-sidebar">
                 <ul className="sidebar-items">
-                    <li className="sidebar-item">
+                    <li
+                    className="sidebar-item"
+                    onClick={() => {navigate("/settings")}}
+                    >
                         <img src={settings} />
                         <p><span>Settings</span></p>
                     </li>
                     <li className="sidebar-item">
                         <img src={
                             (lock == false) ? lock_close : lock_open
-                        }onClick={() => {
+                        } onClick={() => {
                             setExpandable(!expandable)
                             setLock(!lock)
                         }
                         } />
                         <p onClick={() => {
-                                setExpandable(!expandable)
-                                setLock(!lock)
-                            }
-                            }><span>Lock Dashboard</span></p>
+                            setExpandable(!expandable)
+                            setLock(!lock)
+                        }
+                        }><span>Lock Dashboard</span></p>
                     </li>
                 </ul>
             </div>

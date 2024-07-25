@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery } from "react-query";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import aToast from "../staticData/toasterStyle"
-import getWelcome from "../api/getWelcome"
 import getUserDetails from "../api/getUserDetails";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
@@ -13,32 +12,48 @@ import "../styles/App.css"
 
 function Today() {
 
-    // const { isLoading, isError, error, data } = useQuery({
-    //     queryKey: "welcome",
-    //     queryFn: getWelcome
-    // })
+    const [ allTasks, setAllTasks ] = useState([])
 
-    // if (isLoading) {
-    //     return <div>loading...</div>
-    // }
-
-    // if (isError) {
-    //     return <div>Error, {error.message}</div>
-    // }
-
-    // const greeting = <p>{data.greeting}</p>
+    const navigate = useNavigate()
 
     const { isLoading, isError, error, data } = useQuery({
         queryKey: "user_today",
-        queryFn: getUserDetails
+        queryFn: getUserDetails,
+        refetchOnMount: true,
+        refetchOnWindowFocus: true
     })
+
+    useEffect(
+        () => {
+            if (data) {
+                setAllTasks(data)
+            }
+        },
+        [data]
+    )
 
     if (isLoading) {
         return
     }
 
     if (isError) {
-        toast.error(error.message)
+        if (error.response === undefined)
+        {
+            return (
+                <div>
+                    <h4>server error. try later.</h4>
+                </div>
+            )
+        }
+
+        if (error.response.status === 401)
+        {
+            navigate("/signin")
+        }
+    }
+
+    if (!data) {
+        return
     }
 
     return (
@@ -47,16 +62,10 @@ function Today() {
             <div className="main-container">
                 <Sidebar />
                 <div className="main-content">
-                    {/* <Task />
-                    <Task />
-                    <Task /> */}
                     {
-                        // data ? data.tasks.map((task) => {
-                        //     return <Task />
-                        // }) : <></>
-                        (data.user.tasks.count > 0) ? data.user.tasks.map((task, index) => {
-                            <Task />
-                        }) : <h3 id="greeting">Hey, {data.user.username}, add new tasks for today :) </h3>
+                        (allTasks.length > 0) ? allTasks.map((task, index) => {
+                            return <Task task={task} />
+                        }) : <h3 id="greeting">Hey, test, add new tasks for today :) </h3>
                     }
                     <div className="footer">
                         <Footer />
