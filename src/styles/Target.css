@@ -1,11 +1,5 @@
-/* .target-icon {
-    border: 3px solid #964b4b;
-    border-radius: 50%;
-    align-items: center;
+ .target {
+    min-width: 4.5%;
 }
 
-.target-icon > h3 {
-    font-weight: 400;
-    padding-left: 25%;
-}
- */
+
