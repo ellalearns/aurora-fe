@@ -34,7 +34,7 @@ function HourGlass({ hourglassRef }) {
 function TrackTime() {
 
     const navigate = useNavigate()
-
+    
     const location = useLocation()
     const { task = {} } = location.state || {}
 

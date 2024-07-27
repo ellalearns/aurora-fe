@@ -12,33 +12,22 @@ import "../styles/App.css"
 
 function Today() {
 
-    const [ allTasks, setAllTasks ] = useState([])
-
     const navigate = useNavigate()
 
     const { isLoading, isError, error, data } = useQuery({
         queryKey: "user_today",
         queryFn: getUserDetails,
+        enabled: true,
         refetchOnMount: true,
-        refetchOnWindowFocus: true
+        refetchOnWindowFocus: true,
     })
-
-    useEffect(
-        () => {
-            if (data) {
-                setAllTasks(data)
-            }
-        },
-        [data]
-    )
 
     if (isLoading) {
         return
     }
 
     if (isError) {
-        if (error.response === undefined)
-        {
+        if (error.response === undefined) {
             return (
                 <div>
                     <h4>server error. try later.</h4>
@@ -46,8 +35,7 @@ function Today() {
             )
         }
 
-        if (error.response.status === 401)
-        {
+        if (error.response.status === 401) {
             navigate("/signin")
         }
     }
@@ -62,11 +50,11 @@ function Today() {
             <div className="main-container">
                 <Sidebar />
                 <div className="main-content">
-                    {
-                        (allTasks.length > 0) ? allTasks.map((task, index) => {
-                            return <Task task={task} />
-                        }) : <h3 id="greeting">Hey, test, add new tasks for today :) </h3>
-                    }
+                    {data && data.length > 0 ?
+                        data.map((task, index) => {
+                            return <Task key={index} task={task} />
+                        }) :
+                        <h3 id="greeting">Hey, test, add new tasks for today :) </h3>}
                     <div className="footer">
                         <Footer />
                     </div>
