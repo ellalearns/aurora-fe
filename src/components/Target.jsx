@@ -25,7 +25,7 @@ function Target() {
     }
 
     if (data) {
-        value = (data.tasks_done / data.tasks_total) * 100
+        value = Math.floor((data.tasks_done / data.tasks_total) * 100)
         if (isNaN(value)) {
             value = 0
         }

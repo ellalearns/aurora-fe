@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useQueryClient } from "react-query";
+import markTaskDone from "../api/markTaskDone";
 import "../styles/Task.css"
 import start from "../images/start.svg"
 import pomo from "../images/pomo.svg"
@@ -10,6 +12,9 @@ import done from "../images/done.svg"
 function Task({ task }) {
 
     const navigate = useNavigate()
+    const queryClient = useQueryClient()
+
+    const [isDone, setIsDone] = useState(false)
 
     const trackedTime = task.time_entries
     let totalSeconds = 0
@@ -30,9 +35,27 @@ function Task({ task }) {
         }
     }
 
+    const onDone = async () => {
+        const payload = {
+            "id": task["id"]
+        }
+        try {
+            const data = await markTaskDone(payload)
+            console.log(data)
+        } catch (error) {
+            return
+        }
+        queryClient.invalidateQueries("user_target")
+        setIsDone(true)
+    }
+
     return (
         <div className="task-card"
-            onClick={() => { console.log(task.time_entries[0]) }}>
+            style={{
+                visibility: isDone ? "hidden" : "visible",
+                pointerEvents: isDone ? "none" : null
+            }}
+            onClick={() => { }}>
             <div className="title-major">
                 <div className="title-div">
                     <h3>{task.title}</h3>
@@ -51,7 +74,11 @@ function Task({ task }) {
                 />
                 <img src={plus} className="task-icon" />
                 <img src={pomo} className="task-icon" />
-                <img src={done} className="task-icon" />
+                <img
+                    src={done}
+                    className="task-icon"
+                    onClick={() => { onDone() }}
+                />
             </div>
             <h5>{`${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`}</h5>
         </div>
