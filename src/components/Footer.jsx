@@ -26,6 +26,7 @@ function Footer() {
         try {
             const data = await createTask(payload)
             queryClient.invalidateQueries("user_today")
+            queryClient.invalidateQueries("user_target")
             setIsMajor(false)
             setIsOpen(false)
             return data
