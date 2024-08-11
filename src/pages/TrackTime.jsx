@@ -11,7 +11,7 @@ import stopFaded from "../images/stop_faded.svg"
 import pauseFaded from "../images/pause_faded.svg"
 import "../styles/TrackTime.css"
 
-import createTask from "../api/createTask";
+import startTask from "../api/startTask";
 import stopTask from "../api/stopTask";
 
 
@@ -60,12 +60,7 @@ function TrackTime() {
     const [clockStart, setClockStart] = useState(null)
     const [clockStop, setClockStop] = useState(null)
 
-    let stopTime = new Date()
-
     const [taskId, setTaskId] = useState("")
-    let task_id1 = ""
-
-    const [checkstop, setcheckstop] = useState("")
 
     const [titleValue, setTitleValue] = useState("")
     const handleKeyDown = (e) => {
@@ -156,7 +151,7 @@ function TrackTime() {
         }
 
         try {
-            const data = await createTask(payload)
+            const data = await startTask(payload)
             setTaskId(data["id"])
         } catch (error) {
             return

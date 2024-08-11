@@ -2,8 +2,8 @@ import axios from "axios";
 import { URL } from "./url";
 
 const createTask = async (payload) => {
-    const { data } = await axios.patch(
-        `${URL}/task/start`,
+    const { data } = await axios.post(
+        `${URL}/task/`,
         payload,
         {
             headers: {
