@@ -2,14 +2,14 @@ import axios from "axios";
 import { URL } from "./url";
 
 const startTask = async (payload) => {
-    const { data } = await axios.post(
-        `${URL}/track`,
+    const { data } = await axios.patch(
+        `${URL}/task/start`,
         payload,
         {
             headers: {
                 "Content-Type": "application/json"
             },
-            withCredentials: true,
+            withCredentials: true
         }
     )
     return data;
