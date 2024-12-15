@@ -2,10 +2,10 @@ import { useState } from "react";
 import React from "react";
 import { useQueryClient } from "react-query";
 import createTask from "../api/createTask";
-import plus from "../images/plus.svg"
-import "../styles/Footer.css"
+import plus from "../images/plus.svg";
+import "../styles/Footer.css";
 import Modal from "./Modal";
-
+import Notify from "./Notify";
 
 function Footer() {
 
@@ -18,11 +18,17 @@ function Footer() {
     const [isMajor, setIsMajor] = useState(false)
 
     const createTaskFn = async ({ title, desc, isMajor}) => {
+        if (title.trim() === "") {
+            Notify("enter task name")
+            return
+        }
+
         const payload = {
             "title": title,
             "description": desc,
             "is_major": isMajor
         }
+        
         try {
             const data = await createTask(payload)
             queryClient.invalidateQueries("user_today")
