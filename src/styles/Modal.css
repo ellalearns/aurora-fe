@@ -10,8 +10,8 @@
 
 .modal {
     position: fixed;
-    height: 500px;
-    width: 700px;
+    height: 400px;
+    width: 650px;
     background-color: #fffffb;
     z-index: 1000;
     top: 50%;
@@ -20,27 +20,21 @@
     display: flex;
     flex-direction: column;
     padding: 1.55%;
-    border: 3px solid #964b4b;
+    border: 2px solid #964b4b;
     border-radius: 25px;
 }
 
-.top-modal {
-    flex-grow: .1;
-    display: flex;
-    align-items: right;
-    justify-content: right;
-    align-content: right;
-    justify-items: right;
-}
-
 .middle-modal {
-    flex-grow: 0;
+    flex-grow: 1;
+    min-width: 100%;
+    align-self: center;
 }
 
 .bottom-modal {
-    flex-grow: 0.3;
+    flex-grow: 1;
     display: flex;
     justify-content: center;
+    padding-bottom: 1%;
 }
 
 .bottom-modal > button {

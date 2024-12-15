@@ -2,7 +2,6 @@ import React from "react";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import getUserDetails from "../api/getUserDetails";
-import getTarget from "../api/getTarget";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import Task from "../components/Task";
